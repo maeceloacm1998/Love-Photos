@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "25809737985",
+    "project_id": "lovephotos-ee4c5",
+    "storage_bucket": "lovephotos-ee4c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:25809737985:android:e43586833d997715536300",
+        "android_client_info": {
+          "package_name": "com.br.photoscheme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "25809737985-ig9lu0gu0r0phgepfhf1an351p9ia133.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnSktPgTiI-QlpQGwhkHdIGOnPP2v_9zI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "25809737985-ig9lu0gu0r0phgepfhf1an351p9ia133.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
