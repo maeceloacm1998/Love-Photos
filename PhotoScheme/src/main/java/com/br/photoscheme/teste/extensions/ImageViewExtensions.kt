@@ -46,12 +46,14 @@ fun ImageView.loadThumbnail(url: String?) {
 // https://stackoverflow.com/questions/18573774/how-to-reduce-an-image-file-size-before-uploading-to-a-server
 fun Uri.downsizedImageBytes(context: Context): ByteArray? {
     val scaleDivider = 5
+    val MAX_WIDTH_SCALE = 2000
+
     return try {
         val fullBitmap = MediaStore.Images.Media.getBitmap(context.contentResolver, this)
 
         val scaleWidth = fullBitmap.width / scaleDivider
         val scaleHeight = fullBitmap.height / scaleDivider
-        val imageRotation = if (fullBitmap.width > 2000) exifToDegrees(6) else 0
+        val imageRotation = if (fullBitmap.width > MAX_WIDTH_SCALE) exifToDegrees(ExifInterface.ORIENTATION_ROTATE_90) else 0
 
         getDownsizedImageBytes(fullBitmap, imageRotation, scaleWidth, scaleHeight)
     } catch (ioEx: IOException) {
@@ -69,8 +71,8 @@ private fun getDownsizedImageBytes(
     var scaledBitmap =
         Bitmap.createScaledBitmap(fullBitmap!!, scaleWidth, scaleHeight, true)
     val arrayOutput = ByteArrayOutputStream()
-
     if (imageRotation != 0) scaledBitmap = getBitmapRotatedByDegree(scaledBitmap, imageRotation)
+
     scaledBitmap.compress(Bitmap.CompressFormat.JPEG, 100, arrayOutput)
     return arrayOutput.toByteArray()
 }
