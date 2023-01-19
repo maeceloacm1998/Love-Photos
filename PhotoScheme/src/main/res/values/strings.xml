@@ -1,1 +1,4 @@
-<resources></resources>
+<resources>
+    <string name="gallery_text">Galeria</string>
+    <string name="gallery_sub_title">Uma forma especial para guardar todas nossas fotos juntos. ❤️</string>
+</resources>

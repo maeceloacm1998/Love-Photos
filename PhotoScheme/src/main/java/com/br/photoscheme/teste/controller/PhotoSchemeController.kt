@@ -1,7 +1,6 @@
 package com.br.photoscheme.teste.controller
 
 import com.airbnb.epoxy.EpoxyController
-import com.br.photoscheme.teste.holder.gridHolder
 import com.br.photoscheme.teste.holder.photoHolder
 import com.br.photoscheme.teste.holder.updateNewPhotoHolder
 import com.br.photoscheme.teste.models.PhotoItem
@@ -35,6 +34,7 @@ class PhotoSchemeController(private val contract: PhotoSchemeContract) : EpoxyCo
         photoHolder {
             id("photo${photo.id}")
             url(photo.url)
+            clickPhotoListener(contract::clickPhotoListener)
         }
     }
 
