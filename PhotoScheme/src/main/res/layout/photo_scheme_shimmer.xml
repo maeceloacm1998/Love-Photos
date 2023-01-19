@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/shimmer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="3"
+        android:rowCount="4">
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+
+        <include layout="@layout/photo_shimmer" />
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
