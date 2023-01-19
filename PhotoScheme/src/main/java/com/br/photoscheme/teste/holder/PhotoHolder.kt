@@ -21,6 +21,9 @@ abstract class PhotoHolder : EpoxyModelWithHolder<PhotoHolder.SectionHolder>() {
     override fun bind(holder: SectionHolder) {
         super.bind(holder)
         holder.photoImage.loadThumbnail(url)
+        holder.photoImage.setOnClickListener {
+            clickPhotoListener()
+        }
     }
 
     inner class SectionHolder : EpoxyHolder() {
