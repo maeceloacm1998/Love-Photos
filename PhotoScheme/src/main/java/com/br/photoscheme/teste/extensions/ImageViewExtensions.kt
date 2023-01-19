@@ -22,7 +22,7 @@ fun ImageView.load(
 ) {
     if (!url.isNullOrBlank()) {
         LovePhotoPicasso.Picasso(context)
-            .load(url).resize(300, 300).centerCrop()
+            .load(url)
             .placeholder(R.drawable.ic_unavailable_image)
             .apply {
                 extras?.invoke(this)
@@ -53,7 +53,8 @@ fun Uri.downsizedImageBytes(context: Context): ByteArray? {
 
         val scaleWidth = fullBitmap.width / scaleDivider
         val scaleHeight = fullBitmap.height / scaleDivider
-        val imageRotation = if (fullBitmap.width > MAX_WIDTH_SCALE) exifToDegrees(ExifInterface.ORIENTATION_ROTATE_90) else 0
+        val imageRotation =
+            if (fullBitmap.width > MAX_WIDTH_SCALE) exifToDegrees(ExifInterface.ORIENTATION_ROTATE_90) else 0
 
         getDownsizedImageBytes(fullBitmap, imageRotation, scaleWidth, scaleHeight)
     } catch (ioEx: IOException) {
