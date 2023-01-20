@@ -31,7 +31,7 @@ class PhotoSchemeViewModel : ViewModel() {
             photoList.let {
                 val parseLinks = async { repository.parseStorageReferenceToLink(photoList) }.await()
                 withContext(Dispatchers.Main) {
-                    mPhotoList.value = PhotoSchemeState.Success(parseLinks)
+                    mPhotoList.value = PhotoSchemeState.Success(parseLinks.sortedBy { it.id.toInt() })
                 }
             }
         }
