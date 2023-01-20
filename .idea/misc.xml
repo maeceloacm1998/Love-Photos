@@ -20,7 +20,10 @@
         <entry key="PhotoScheme/src/main/res/layout/preview_photo_loading.xml" value="0.3953771289537713" />
         <entry key="PhotoScheme/src/main/res/layout/update_new_photo_holder.xml" value="0.9" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1805" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1859375" />
+        <entry key="app/src/main/res/drawable/bg_error.xml" value="0.209" />
+        <entry key="app/src/main/res/layout/activity_end_step.xml" value="0.3385416666666667" />
+        <entry key="app/src/main/res/layout/activity_first_step.xml" value="0.17239583333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19719765098183067" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1805" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1805" />
       </map>

@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LovePhotos">
         <activity
+            android:name=".EndStep"
+            android:exported="false" />
+        <activity
+            android:name=".FirstStep"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

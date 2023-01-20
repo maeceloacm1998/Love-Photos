@@ -20,23 +20,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/image"
-                android:layout_width="135dp"
-                android:layout_height="135dp"
+                android:layout_width="155dp"
+                android:layout_height="155dp"
                 android:layout_marginTop="76dp"
-                android:src="@drawable/photo"
                 app:layout_constraintBottom_toTopOf="@id/title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="detetive.json"
+                app:lottie_loop="true" />
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Bem Vinda ❤️"
+                android:text="Tá, mas que projeto é esse?️"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -51,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="Eeeei lindaaaa, você nesse momento deve está sorrindo, pensando 'Meu Deus kkkkkkkk 😅'. Mas sim, eu tenho meu jeitinho nerd de fazer as coisas e tive essa ideia com muito carinho. Durante as proximas etapas, vou revelar um projeto que vou fazer até o nosso primeiro ano de namoro, na qual vai facilitar nossa vida, no aspecto de organição."
+                android:text="A ideia é que a cada mês de namoro eu melhore ou traga uma novidade para esse aplicativo. Ele vai servir para várias coisas, como guardar, escrever, lembrar."
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
@@ -64,12 +66,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="Mas antes de falar sobre o projeto, queria falar que fiz isso com muito carinho, foram alguns dias durante a madrugada, mas no final consegui fazer o inicio de algo muito maior. "
+                android:text="Agora vem uma dinâmica, tu precisa acertar a pergunta que vou fazer e assim que acertar, você consegue acesso a surpresa."
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text1" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_marginTop="26dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text2"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="hearth.json"
+                app:lottie_loop="true" />
 
             <TextView
                 android:id="@+id/text3"
@@ -77,55 +91,92 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="Hoje fazem dois meses que que estamos juntos e como falei no whatsapp, sou muito feliz como Deus vem conduzindo as nossas vidas, a nossa amizade e a felicidade ao lado do outro. A cada semana que passa, percebo o quão mais proximos e amgos ficamos, uma conexão e o quanto cada um ensina o outro com sua vida."
+                android:text="Qual foi a primeira meta que fizemos?"
+                android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text2" />
+                app:layout_constraintTop_toBottomOf="@id/animation" />
 
             <ImageView
                 android:id="@+id/image1"
                 android:layout_width="235dp"
                 android:layout_height="235dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/photo1"
+                android:src="@drawable/photo2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text3" />
 
-            <TextView
-                android:id="@+id/text4"
+            <View
+                android:id="@+id/one_btn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="Essa foto, como disse, é a que eu mais gosto, porque mostra um pouco da nossa essencia, que por mais que sejamos bastante diferentes, existe uma química muito gostosa e como realmente somos, mostra que existe confiança e que Deus uniu nos dois para um propósito."
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="16sp"
+                android:background="@drawable/bg_border_rounded_gray"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fazer trilha no parque das mangabeiras"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/one_btn"
+                app:layout_constraintEnd_toEndOf="@id/one_btn"
+                app:layout_constraintStart_toStartOf="@id/one_btn"
+                app:layout_constraintTop_toTopOf="@id/one_btn" />
+
+            <View
+                android:id="@+id/two_btn"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_border_rounded_gray"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/one_btn" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Viajar juntos"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/two_btn"
+                app:layout_constraintEnd_toEndOf="@id/two_btn"
+                app:layout_constraintStart_toStartOf="@id/two_btn"
+                app:layout_constraintTop_toTopOf="@id/two_btn" />
 
             <View
                 android:id="@+id/next_btn"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/bg_border_rounded_gray"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text4" />
+                app:layout_constraintTop_toBottomOf="@id/two_btn" />
 
             <TextView
                 android:id="@+id/title_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Proximo"
+                android:text="Responder conversas antigas do wpp"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
