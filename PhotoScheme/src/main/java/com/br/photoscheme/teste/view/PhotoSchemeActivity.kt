@@ -62,6 +62,9 @@ class PhotoSchemeActivity : AppCompatActivity() {
                 is PhotoSchemeState.Loading -> {
                     visibleShimmer()
                 }
+                is PhotoSchemeState.UpdatePhoto -> {
+                    visibleLoadingUpdatePhoto()
+                }
                 else -> {}
             }
         }
@@ -115,6 +118,14 @@ class PhotoSchemeActivity : AppCompatActivity() {
 
     private fun visibleShimmer() {
         binding.photoSchemeRv.visibility = View.GONE
+        binding.layoutUpdatePhoto.loading.visibility = View.GONE
         binding.photoSchemeShimmerId.shimmer.visibility = View.VISIBLE
+    }
+
+    private fun visibleLoadingUpdatePhoto() {
+        binding.photoSchemeRv.visibility = View.GONE
+        binding.photoSchemeShimmerId.shimmer.visibility = View.GONE
+        binding.layoutUpdatePhoto.loading.visibility = View.VISIBLE
+        binding.layoutUpdatePhoto.animationView.speed = 0.3F
     }
 }

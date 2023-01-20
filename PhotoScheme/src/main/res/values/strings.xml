@@ -3,4 +3,5 @@
     <string name="gallery_sub_title">Uma forma especial para guardar todas nossas fotos juntos. ❤️</string>
     <string name="message_error">Erro ao carregar sua imagem, tente novamente :(</string>
     <string name="retry_btn_text">Tentar Novamente</string>
+    <string name="save_photo_text">Salvando a foto...</string>
 </resources>

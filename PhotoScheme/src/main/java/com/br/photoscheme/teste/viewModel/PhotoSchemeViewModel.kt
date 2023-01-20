@@ -38,6 +38,8 @@ class PhotoSchemeViewModel : ViewModel() {
     }
 
     fun updatePhoto(scaleDividerThumb: ByteArray?, scaleDividerPhoto: ByteArray?) {
+        mPhotoList.value = PhotoSchemeState.UpdatePhoto
+
         CoroutineScope(Dispatchers.IO).launch {
             val uuid = UUID.nameUUIDFromBytes(scaleDividerThumb).toString()
             async {

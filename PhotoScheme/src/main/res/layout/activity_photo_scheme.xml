@@ -8,6 +8,18 @@
     android:padding="16dp"
     tools:context=".teste.view.PhotoSchemeActivity">
 
+    <include android:id="@+id/layout_update_photo" layout="@layout/photo_scheme_update_photo" android:visibility="gone"/>
+
+    <include
+        android:id="@+id/photo_scheme_shimmer_id"
+        layout="@layout/photo_scheme_shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sub_title" />
+
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -35,16 +47,6 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sub_title" />
-
-    <include
-        android:id="@+id/photo_scheme_shimmer_id"
-        layout="@layout/photo_scheme_shimmer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sub_title" />
