@@ -1,39 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-    <component name="DesignSurface">
-        <option name="filePathToZoomLevelMap">
-            <map>
-                <entry
-                    key="../../Library/Android/sdk/platforms/android-32/data/res/drawable/ratingbar_indicator_material.xml"
-                    value="0.1805" />
-                <entry key="PhotoScheme/src/main/res/drawable/bg_border_rounded_gray.xml"
-                    value="0.1805" />
-                <entry key="PhotoScheme/src/main/res/drawable/bg_ripple.xml" value="0.1805" />
-                <entry key="PhotoScheme/src/main/res/drawable/ic_unavailable_image.xml"
-                    value="0.194" />
-                <entry key="PhotoScheme/src/main/res/layout-v23/photo_holder.xml"
-                    value="0.171875" />
-                <entry key="PhotoScheme/src/main/res/layout/activity_photo_scheme.xml"
-                    value="0.3453125" />
-                <entry key="PhotoScheme/src/main/res/layout/grid_layout_holder.xml"
-                    value="0.359375" />
-                <entry key="PhotoScheme/src/main/res/layout/photo_holder.xml"
-                    value="0.7454015096028646" />
-                <entry key="PhotoScheme/src/main/res/layout/photo_scheme_shimmer.xml"
-                    value="0.3385416666666667" />
-                <entry key="PhotoScheme/src/main/res/layout/photo_shimmer.xml"
-                    value="0.3385416666666667" />
-                <entry key="PhotoScheme/src/main/res/layout/update_new_photo_holder.xml"
-                    value="0.9" />
-                <entry key="app/src/main/res/layout/activity_main.xml" value="0.1859375" />
-            </map>
-        </option>
-    </component>
-    <component name="ProjectRootManager" default="true" languageLevel="JDK_11" project-jdk-name="Android Studio default JDK"
-        project-jdk-type="JavaSDK" version="2">
-        <output url="file://$PROJECT_DIR$/build/classes" />
-    </component>
-    <component name="ProjectType">
-        <option name="id" value="Android" />
-    </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../Library/Android/sdk/platforms/android-32/data/res/drawable/ratingbar_indicator_material.xml" value="0.1805" />
+        <entry key="PhotoScheme/src/main/res/drawable/bg_border_rounded_gray.xml" value="0.1805" />
+        <entry key="PhotoScheme/src/main/res/drawable/bg_outline_button.xml" value="0.209" />
+        <entry key="PhotoScheme/src/main/res/drawable/bg_ripple.xml" value="0.1805" />
+        <entry key="PhotoScheme/src/main/res/drawable/ic_unavailable_image.xml" value="0.194" />
+        <entry key="PhotoScheme/src/main/res/layout-v23/photo_holder.xml" value="0.171875" />
+        <entry key="PhotoScheme/src/main/res/layout/activity_photo_scheme.xml" value="0.3453125" />
+        <entry key="PhotoScheme/src/main/res/layout/activity_preview_photo.xml" value="0.30143737792968744" />
+        <entry key="PhotoScheme/src/main/res/layout/grid_layout_holder.xml" value="0.359375" />
+        <entry key="PhotoScheme/src/main/res/layout/photo_holder.xml" value="0.7454015096028646" />
+        <entry key="PhotoScheme/src/main/res/layout/photo_scheme_shimmer.xml" value="0.3385416666666667" />
+        <entry key="PhotoScheme/src/main/res/layout/photo_shimmer.xml" value="0.3385416666666667" />
+        <entry key="PhotoScheme/src/main/res/layout/preview_photo_error.xml" value="0.3385416666666667" />
+        <entry key="PhotoScheme/src/main/res/layout/preview_photo_loading.xml" value="0.3953771289537713" />
+        <entry key="PhotoScheme/src/main/res/layout/update_new_photo_holder.xml" value="0.9" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1859375" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
 </project>

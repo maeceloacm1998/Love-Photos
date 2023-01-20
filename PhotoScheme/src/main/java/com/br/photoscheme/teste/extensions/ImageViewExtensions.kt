@@ -23,7 +23,6 @@ fun ImageView.load(
     if (!url.isNullOrBlank()) {
         LovePhotoPicasso.Picasso(context)
             .load(url)
-            .placeholder(R.drawable.ic_unavailable_image)
             .apply {
                 extras?.invoke(this)
             }
@@ -44,15 +43,16 @@ fun ImageView.loadThumbnail(url: String?) {
 
 // Essa função veio através da resposta dessa link no stackoverflow.
 // https://stackoverflow.com/questions/18573774/how-to-reduce-an-image-file-size-before-uploading-to-a-server
-fun Uri.downsizedImageBytes(context: Context): ByteArray? {
-    val scaleDivider = 5
+fun Uri.downsizedImageBytes(context: Context, scaleDivider: Int? = null): ByteArray? {
+    val SCALE_DIVIDER_THUMB = 5
     val MAX_WIDTH_SCALE = 2000
 
     return try {
         val fullBitmap = MediaStore.Images.Media.getBitmap(context.contentResolver, this)
+        val useScaleDivider = scaleDivider ?: SCALE_DIVIDER_THUMB
 
-        val scaleWidth = fullBitmap.width / scaleDivider
-        val scaleHeight = fullBitmap.height / scaleDivider
+        val scaleWidth = fullBitmap.width / useScaleDivider
+        val scaleHeight = fullBitmap.height / useScaleDivider
         val imageRotation =
             if (fullBitmap.width > MAX_WIDTH_SCALE) exifToDegrees(ExifInterface.ORIENTATION_ROTATE_90) else 0
 

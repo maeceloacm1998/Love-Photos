@@ -16,13 +16,13 @@ abstract class PhotoHolder : EpoxyModelWithHolder<PhotoHolder.SectionHolder>() {
     var url: String = ""
 
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-    lateinit var clickPhotoListener: () -> Unit
+    lateinit var clickPhotoListener: (url: String) -> Unit
 
     override fun bind(holder: SectionHolder) {
         super.bind(holder)
         holder.photoImage.loadThumbnail(url)
         holder.photoImage.setOnClickListener {
-            clickPhotoListener()
+            clickPhotoListener(url)
         }
     }
 

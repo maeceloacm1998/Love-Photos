@@ -13,14 +13,23 @@ import java.util.UUID
 class PhotoSchemeRepository : PhotoSchemeRep {
     private val storage = Firebase.storage
 
-    override suspend fun getPhotoList(): MutableList<StorageReference> {
+    override suspend fun getPhotoList(child: String): MutableList<StorageReference> {
         var list: MutableList<StorageReference> = mutableListOf()
-        storage.reference.child(PhotoSchemeConstants.THUMB_PATH).listAll()
+        storage.reference.child(child).listAll()
             .addOnSuccessListener { photos ->
                 list = photos.items
             }
         delay(3000L)
         return list
+    }
+
+    override suspend fun getSpecificPhoto(photoId: String, child: String): String {
+        var url = ""
+        storage.reference.child("${child}/${photoId}").downloadUrl.addOnSuccessListener { photo ->
+            url = photo.toString()
+        }
+        delay(1000L)
+        return url
     }
 
     override suspend fun parseStorageReferenceToLink(photos: MutableList<StorageReference>): MutableList<PhotoItem> {
@@ -37,11 +46,10 @@ class PhotoSchemeRepository : PhotoSchemeRep {
         return list
     }
 
-    override suspend fun updatePhoto(downsizedImageBytes: ByteArray?) {
-        val uuid = UUID.nameUUIDFromBytes(downsizedImageBytes)
+    override suspend fun updatePhoto(downsizedImageBytes: ByteArray?, path: String, uuid: String) {
         val storageReference =
-            FirebaseStorage.getInstance().getReference("/${PhotoSchemeConstants.THUMB_PATH}")
-                .child(uuid.toString())
+            FirebaseStorage.getInstance().getReference("/${path}")
+                .child(uuid)
         storageReference.putBytes(downsizedImageBytes!!)
         delay(3000L)
     }

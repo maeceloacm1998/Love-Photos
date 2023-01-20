@@ -3,7 +3,11 @@
     package="com.br.photoscheme">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application>
+        <activity
+            android:name=".teste.view.PreviewPhotoActivity"
+            android:exported="false" />
         <activity
             android:name=".teste.view.PhotoSchemeActivity"
             android:exported="false" />

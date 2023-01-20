@@ -12,9 +12,10 @@ import com.br.photoscheme.teste.constants.PhotoSchemeConstants
 import com.br.photoscheme.teste.controller.PhotoSchemeController
 import com.br.photoscheme.teste.extensions.downsizedImageBytes
 import com.br.photoscheme.teste.models.PhotoItem
-import com.br.photoscheme.teste.models.asDomainModel
+import com.br.photoscheme.teste.models.asThumbModel
 import com.br.photoscheme.teste.models.contract.PhotoSchemeContract
 import com.br.photoscheme.teste.service.database.PhotoListDB
+import com.br.photoscheme.teste.service.database.ThumbListDB
 import com.br.photoscheme.teste.state.PhotoSchemeState
 import com.br.photoscheme.teste.viewModel.PhotoSchemeViewModel
 import com.google.firebase.FirebaseApp
@@ -54,7 +55,7 @@ class PhotoSchemeActivity : AppCompatActivity() {
                         PhotoItem(PhotoSchemeConstants.ID_UPDATE_PHOTO_COMPONENT, "")
                     )
 
-                    savePhotoListInDB(photoSchemeState.photolist)
+                    saveThumbListInDB(photoSchemeState.photolist)
                     controller.setPhotosList(newPhotoList)
                     visiblePhotoList()
                 }
@@ -66,22 +67,22 @@ class PhotoSchemeActivity : AppCompatActivity() {
         }
     }
 
-    private fun savePhotoListInDB(photoList: List<PhotoItem>) {
-        val dao = PhotoListDB.getDataBase(applicationContext).photoListDAO()
-        val newPhotoListDB = photoList.map {
-            it.asDomainModel()
+    private fun saveThumbListInDB(photoList: List<PhotoItem>) {
+        val dao = ThumbListDB.getDataBase(applicationContext).thumbListDAO()
+        val newThumbListDB = photoList.map {
+            it.asThumbModel()
         }
-        dao.clearPhotoList()
-        dao.createPhotoList(newPhotoListDB)
+        dao.clearThumbList()
+        dao.createThumbList(newThumbListDB)
     }
 
     private fun handleFetchPhotoList() {
-        val dao = PhotoListDB.getDataBase(applicationContext).photoListDAO()
-        if (dao.getPhotoList().isNullOrEmpty()) {
-            viewModel.fetchPhotos()
+        val dao = ThumbListDB.getDataBase(applicationContext).thumbListDAO()
+        if (dao.getThumbList().isNullOrEmpty()) {
+            viewModel.fetchPhotos(PhotoSchemeConstants.THUMB_PATH)
             return
         }
-        viewModel.fetchPhotosOfDB(dao)
+        viewModel.fetchThumbOfDB(dao)
     }
 
     var imagePickerActivityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
@@ -89,7 +90,9 @@ class PhotoSchemeActivity : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val imageUri = result.data?.data
-            viewModel.updatePhoto(imageUri?.downsizedImageBytes(applicationContext))
+            val downsizedThumb = imageUri?.downsizedImageBytes(applicationContext, null)
+            val downsizedPhoto = imageUri?.downsizedImageBytes(applicationContext, 2)
+            viewModel.updatePhoto(downsizedThumb, downsizedPhoto)
         }
     }
 
@@ -100,7 +103,8 @@ class PhotoSchemeActivity : AppCompatActivity() {
             imagePickerActivityResult.launch(intent);
         }
 
-        override fun clickPhotoListener() {
+        override fun clickPhotoListener(url: String) {
+            startActivity(PreviewPhotoActivity.newInstance(applicationContext, url))
         }
     }
 
