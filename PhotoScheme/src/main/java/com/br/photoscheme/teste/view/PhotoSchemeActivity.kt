@@ -29,12 +29,12 @@ class PhotoSchemeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPhotoSchemeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        FirebaseApp.initializeApp(applicationContext);
         PhotoListDB.getDataBase(applicationContext);
 
         controller()
         observers()
         handleFetchPhotoList()
+        handleSwipeRefresh()
     }
 
     private fun controller() {
@@ -88,6 +88,12 @@ class PhotoSchemeActivity : AppCompatActivity() {
         viewModel.fetchThumbOfDB(dao)
     }
 
+    private fun handleSwipeRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.fetchPhotos(PhotoSchemeConstants.THUMB_PATH)
+        }
+    }
+
     var imagePickerActivityResult: ActivityResultLauncher<Intent> = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -117,12 +123,14 @@ class PhotoSchemeActivity : AppCompatActivity() {
     }
 
     private fun visibleShimmer() {
+        binding.swipeRefresh.isRefreshing = false
         binding.photoSchemeRv.visibility = View.GONE
         binding.layoutUpdatePhoto.loading.visibility = View.GONE
         binding.photoSchemeShimmerId.shimmer.visibility = View.VISIBLE
     }
 
     private fun visibleLoadingUpdatePhoto() {
+        binding.swipeRefresh.isRefreshing = false
         binding.photoSchemeRv.visibility = View.GONE
         binding.photoSchemeShimmerId.shimmer.visibility = View.GONE
         binding.layoutUpdatePhoto.loading.visibility = View.VISIBLE

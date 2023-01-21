@@ -8,7 +8,10 @@
     android:padding="16dp"
     tools:context=".teste.view.PhotoSchemeActivity">
 
-    <include android:id="@+id/layout_update_photo" layout="@layout/photo_scheme_update_photo" android:visibility="gone"/>
+    <include
+        android:id="@+id/layout_update_photo"
+        layout="@layout/photo_scheme_update_photo"
+        android:visibility="gone" />
 
     <include
         android:id="@+id/photo_scheme_shimmer_id"
@@ -41,14 +44,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title" />
 
-    <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/photo_scheme_rv"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sub_title" />
+        app:layout_constraintTop_toBottomOf="@id/sub_title">
+
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/photo_scheme_rv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sub_title" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
