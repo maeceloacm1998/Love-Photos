@@ -7,7 +7,6 @@ import com.br.photoscheme.teste.constants.PhotoSchemeConstants
 import com.br.photoscheme.teste.models.FirebaseResponse
 import com.br.photoscheme.teste.models.PhotoItem
 import com.br.photoscheme.teste.repository.PhotoSchemeRepository
-import com.br.photoscheme.teste.service.dao.PhotoListDAO
 import com.br.photoscheme.teste.service.dao.ThumbListDAO
 import com.br.photoscheme.teste.service.entity.asDomainModel
 import com.br.photoscheme.teste.state.PhotoSchemeState
