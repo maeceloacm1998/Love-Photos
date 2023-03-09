@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.br.photoscheme.teste.constants.PhotoSchemeConstants
+import com.br.photoscheme.teste.models.FirebaseResponse
+import com.br.photoscheme.teste.models.PhotoItem
 import com.br.photoscheme.teste.repository.PhotoSchemeRepository
 import com.br.photoscheme.teste.service.dao.PhotoListDAO
 import com.br.photoscheme.teste.service.dao.ThumbListDAO
@@ -25,16 +27,16 @@ class PhotoSchemeViewModel : ViewModel() {
     fun fetchPhotos(path: String) {
         mPhotoList.value = PhotoSchemeState.Loading
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val photoList = async { repository.getPhotoList(path) }.await()
-
-            photoList.let {
-                val parseLinks = async { repository.parseStorageReferenceToLink(photoList) }.await()
-                withContext(Dispatchers.Main) {
-                    mPhotoList.value = PhotoSchemeState.Success(parseLinks.sortedBy { it.id.toInt() })
-                }
+        repository.getPhotoList(path, object : FirebaseResponse {
+            override fun success(result: Any) {
+                val photos = result as List<PhotoItem>
+                mPhotoList.value = PhotoSchemeState.Success(photos.sortedBy { it.id.toInt() })
             }
-        }
+
+            override fun error() {
+                TODO("Not yet implemented")
+            }
+        })
     }
 
     fun updatePhoto(scaleDividerThumb: ByteArray?, scaleDividerPhoto: ByteArray?) {
