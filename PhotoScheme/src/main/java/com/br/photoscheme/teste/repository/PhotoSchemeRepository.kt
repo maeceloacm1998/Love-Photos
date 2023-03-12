@@ -22,13 +22,10 @@ class PhotoSchemeRepository : PhotoSchemeRep {
             }
     }
 
-    override suspend fun getSpecificPhoto(photoId: String, child: String): String {
-        var url = ""
+    override fun getSpecificPhoto(photoId: String, child: String, firebaseResponse: FirebaseResponse) {
         storage.reference.child("${child}/${photoId}").downloadUrl.addOnSuccessListener { photo ->
-            url = photo.toString()
-        }
-        delay(1000L)
-        return url
+            firebaseResponse.success(photo.toString())
+        }.addOnFailureListener { firebaseResponse.error() }
     }
 
     private fun parseStorageReferenceToLink(photos: MutableList<StorageReference>, firebaseResponse: FirebaseResponse) {
