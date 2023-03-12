@@ -14,16 +14,21 @@ import com.br.photoscheme.teste.extensions.downsizedImageBytes
 import com.br.photoscheme.teste.models.PhotoItem
 import com.br.photoscheme.teste.models.asThumbModel
 import com.br.photoscheme.teste.models.contract.PhotoSchemeContract
+import com.br.photoscheme.teste.repository.PhotoSchemeRepository
 import com.br.photoscheme.teste.service.database.PhotoListDB
 import com.br.photoscheme.teste.service.database.ThumbListDB
 import com.br.photoscheme.teste.state.PhotoSchemeState
 import com.br.photoscheme.teste.viewModel.PhotoSchemeViewModel
-import com.google.firebase.FirebaseApp
 
 class PhotoSchemeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPhotoSchemeBinding
-    private val controller by lazy { PhotoSchemeController(contract) }
-    private val viewModel by lazy { PhotoSchemeViewModel() }
+    private val controller by lazy { PhotoSchemeController(photoSchemeContract) }
+    private val viewModel by lazy {
+        PhotoSchemeViewModel(
+            PhotoSchemeRepository(),
+            ThumbListDB.getDataBase(applicationContext).thumbListDAO()
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +36,13 @@ class PhotoSchemeActivity : AppCompatActivity() {
         setContentView(binding.root)
         PhotoListDB.getDataBase(applicationContext);
 
-        controller()
+        photoSchemeController()
         observers()
         handleFetchPhotoList()
         handleSwipeRefresh()
     }
 
-    private fun controller() {
+    private fun photoSchemeController() {
         binding.photoSchemeRv.apply {
             setController(controller)
             layoutManager = GridLayoutManager(context, 3)
@@ -50,11 +55,7 @@ class PhotoSchemeActivity : AppCompatActivity() {
             when (photoSchemeState) {
                 is PhotoSchemeState.Success -> {
                     val newPhotoList = photoSchemeState.photolist.toMutableList()
-                    newPhotoList.add(
-                        0,
-                        PhotoItem(PhotoSchemeConstants.ID_UPDATE_PHOTO_COMPONENT, "")
-                    )
-
+                    includeAddPhotoButton(newPhotoList)
                     saveThumbListInDB(photoSchemeState.photolist)
                     controller.setPhotosList(newPhotoList)
                     visiblePhotoList()
@@ -70,22 +71,24 @@ class PhotoSchemeActivity : AppCompatActivity() {
         }
     }
 
+    private fun includeAddPhotoButton(photoList: MutableList<PhotoItem>): MutableList<PhotoItem> {
+        photoList.add(0, PhotoItem(PhotoSchemeConstants.ID_UPDATE_PHOTO_COMPONENT, ""))
+        return photoList
+    }
+
     private fun saveThumbListInDB(photoList: List<PhotoItem>) {
-        val dao = ThumbListDB.getDataBase(applicationContext).thumbListDAO()
-        val newThumbListDB = photoList.map {
-            it.asThumbModel()
-        }
-        dao.clearThumbList()
-        dao.createThumbList(newThumbListDB)
+        val newThumbListDB = photoList.map { it.asThumbModel() }
+        viewModel.createThumbList(newThumbListDB)
     }
 
     private fun handleFetchPhotoList() {
         val dao = ThumbListDB.getDataBase(applicationContext).thumbListDAO()
-        if (dao.getThumbList().isNullOrEmpty()) {
+
+        if (dao.getThumbList().isEmpty()) {
             viewModel.fetchPhotos(PhotoSchemeConstants.THUMB_PATH)
             return
         }
-        viewModel.fetchThumbOfDB(dao)
+        viewModel.fetchThumbOfDB()
     }
 
     private fun handleSwipeRefresh() {
@@ -105,7 +108,7 @@ class PhotoSchemeActivity : AppCompatActivity() {
         }
     }
 
-    val contract = object : PhotoSchemeContract {
+    private val photoSchemeContract = object : PhotoSchemeContract {
         override fun clickUpdatePhotoListener() {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = PhotoSchemeConstants.INTENT_TYPE_GALLERY_ACTIVITY

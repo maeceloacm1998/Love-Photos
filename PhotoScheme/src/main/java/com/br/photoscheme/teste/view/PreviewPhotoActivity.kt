@@ -10,14 +10,7 @@ import com.br.photoscheme.databinding.ActivityPreviewPhotoBinding
 import com.br.photoscheme.teste.constants.PhotoSchemeConstants
 import com.br.photoscheme.teste.extensions.load
 import com.br.photoscheme.teste.extensions.loadThumbnail
-import com.br.photoscheme.teste.models.PhotoItem
-import com.br.photoscheme.teste.models.asPhotoModel
-import com.br.photoscheme.teste.models.asThumbModel
-import com.br.photoscheme.teste.service.database.PhotoListDB
-import com.br.photoscheme.teste.service.database.ThumbListDB
-import com.br.photoscheme.teste.state.PhotoSchemeState
 import com.br.photoscheme.teste.state.PreviewPhotoState
-import com.br.photoscheme.teste.viewModel.PhotoSchemeViewModel
 import com.br.photoscheme.teste.viewModel.PreviewPhotoViewModel
 
 class PreviewPhotoActivity : AppCompatActivity() {
