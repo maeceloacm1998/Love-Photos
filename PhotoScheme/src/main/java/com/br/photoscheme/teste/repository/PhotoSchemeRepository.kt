@@ -49,11 +49,12 @@ class PhotoSchemeRepository : PhotoSchemeRep {
         }
     }
 
-    override suspend fun updatePhoto(downsizedImageBytes: ByteArray?, path: String, uuid: String) {
-        val storageReference =
-            FirebaseStorage.getInstance().getReference("/${path}")
-                .child(uuid)
-        storageReference.putBytes(downsizedImageBytes!!)
-        delay(3000L)
+    override fun updatePhoto(downsizedImageBytes: ByteArray?, path: String, uuid: String, response: FirebaseResponse) {
+        val storageReference = FirebaseStorage.getInstance().getReference("/${path}").child(uuid)
+        storageReference.putBytes(downsizedImageBytes!!).addOnSuccessListener {
+            response.success(null)
+        }.addOnFailureListener {
+            response.error()
+        }
     }
 }

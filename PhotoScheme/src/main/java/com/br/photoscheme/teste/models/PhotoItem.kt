@@ -8,18 +8,22 @@ data class PhotoItem(
     val url: String
 )
 
-fun PhotoItem.asThumbModel(): ThumbListEntity {
-    val photoEntity = ThumbListEntity()
-    photoEntity.mId = this.id
-    photoEntity.url = this.url
+fun List<PhotoItem>.asThumbListModel(): List<ThumbListEntity> {
+    return this.map {
+        it.asThumbModel()
+    }
+}
 
-    return photoEntity
+fun PhotoItem.asThumbModel(): ThumbListEntity {
+    return ThumbListEntity().also {
+        it.mId = id
+        it.url = url
+    }
 }
 
 fun PhotoItem.asPhotoModel(): PhotoListEntity {
-    val photoEntity = PhotoListEntity()
-    photoEntity.mId = this.id
-    photoEntity.url = this.url
-
-    return photoEntity
+    return PhotoListEntity().also {
+        it.mId = id
+        it.url = url
+    }
 }

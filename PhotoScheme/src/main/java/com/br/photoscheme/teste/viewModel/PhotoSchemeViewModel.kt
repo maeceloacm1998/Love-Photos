@@ -8,17 +8,15 @@ import com.br.photoscheme.teste.models.FirebaseResponse
 import com.br.photoscheme.teste.models.PhotoItem
 import com.br.photoscheme.teste.repository.PhotoSchemeRepository
 import com.br.photoscheme.teste.service.dao.ThumbListDAO
+import com.br.photoscheme.teste.service.entity.ThumbListEntity
 import com.br.photoscheme.teste.service.entity.asDomainModel
 import com.br.photoscheme.teste.state.PhotoSchemeState
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.*
+import java.util.UUID
 
-class PhotoSchemeViewModel : ViewModel() {
-    private val repository = PhotoSchemeRepository()
+class PhotoSchemeViewModel(
+    private val repository: PhotoSchemeRepository,
+    private val dao: ThumbListDAO
+) : ViewModel() {
 
     private var mPhotoList = MutableLiveData<PhotoSchemeState>()
     var photoList: LiveData<PhotoSchemeState> = mPhotoList
@@ -27,7 +25,7 @@ class PhotoSchemeViewModel : ViewModel() {
         mPhotoList.value = PhotoSchemeState.Loading
 
         repository.getPhotoList(path, object : FirebaseResponse {
-            override fun success(result: Any) {
+            override fun success(result: Any?) {
                 val photos = result as List<PhotoItem>
                 mPhotoList.value = PhotoSchemeState.Success(photos.sortedBy { it.id.toInt() })
             }
@@ -41,30 +39,40 @@ class PhotoSchemeViewModel : ViewModel() {
     fun updatePhoto(scaleDividerThumb: ByteArray?, scaleDividerPhoto: ByteArray?) {
         mPhotoList.value = PhotoSchemeState.UpdatePhoto
 
-        CoroutineScope(Dispatchers.IO).launch {
-            val uuid = UUID.nameUUIDFromBytes(scaleDividerThumb).toString()
-            async {
-                repository.updatePhoto(
-                    scaleDividerThumb,
-                    PhotoSchemeConstants.THUMB_PATH,
-                    uuid
-                )
-            }.await()
-            async {
-                repository.updatePhoto(
-                    scaleDividerPhoto,
-                    PhotoSchemeConstants.PHOTO_PATH,
-                    uuid
-                )
-            }.await()
+        val uuid = UUID.nameUUIDFromBytes(scaleDividerThumb).toString()
+        repository.updatePhoto(
+            scaleDividerThumb,
+            PhotoSchemeConstants.THUMB_PATH,
+            uuid,
+            object : FirebaseResponse {
+                override fun success(result: Any?) {}
 
-            withContext(Dispatchers.Main) {
-                fetchPhotos(PhotoSchemeConstants.THUMB_PATH)
+                override fun error() {}
             }
-        }
+        )
+
+        repository.updatePhoto(
+            scaleDividerPhoto,
+            PhotoSchemeConstants.PHOTO_PATH,
+            uuid,
+            object : FirebaseResponse {
+                override fun success(result: Any?) {
+                    fetchPhotos(PhotoSchemeConstants.THUMB_PATH)
+                }
+
+                override fun error() {
+
+                }
+            }
+        )
     }
 
-    fun fetchThumbOfDB(dao: ThumbListDAO) {
+    fun createThumbList(thumbListDB: List<ThumbListEntity>) {
+        dao.clearThumbList()
+        dao.createThumbList(thumbListDB)
+    }
+
+    fun fetchThumbOfDB() {
         mPhotoList.value = PhotoSchemeState.Loading
 
         val newPhotoList = dao.getThumbList().map {
