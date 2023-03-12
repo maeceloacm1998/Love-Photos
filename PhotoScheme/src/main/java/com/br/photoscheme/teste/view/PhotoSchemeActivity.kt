@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.br.photoscheme.databinding.ActivityPhotoSchemeBinding
 import com.br.photoscheme.teste.constants.PhotoSchemeConstants
 import com.br.photoscheme.teste.controller.PhotoSchemeController
+import com.br.photoscheme.teste.extensions.GridLayoutDecoration
 import com.br.photoscheme.teste.extensions.downsizedImageBytes
 import com.br.photoscheme.teste.models.PhotoItem
 import com.br.photoscheme.teste.models.asThumbModel
@@ -45,7 +46,9 @@ class PhotoSchemeActivity : AppCompatActivity() {
     private fun photoSchemeController() {
         binding.photoSchemeRv.apply {
             setController(controller)
-            layoutManager = GridLayoutManager(context, 3)
+            layoutManager = GridLayoutManager(context, 4)
+            val itemDecoration = GridLayoutDecoration(applicationContext, com.airbnb.viewmodeladapter.R.dimen.abc_control_padding_material)
+            addItemDecoration(itemDecoration)
             requestModelBuild()
         }
     }

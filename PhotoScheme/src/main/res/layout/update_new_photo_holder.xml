@@ -2,16 +2,15 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_width="82dp"
+    android:layout_height="85dp"
     android:elevation="@dimen/cardview_default_elevation"
     app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/update_photo_btn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@drawable/bg_border_rounded_gray"
         android:clickable="true"
         android:focusable="true">
@@ -19,6 +18,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="40dp"
+            android:contentDescription="Adicionar foto"
             android:src="@drawable/ic_baseline_add_to_photos_24"
             android:tint="@color/gray_scale_400"
             app:layout_constraintBottom_toBottomOf="parent"
