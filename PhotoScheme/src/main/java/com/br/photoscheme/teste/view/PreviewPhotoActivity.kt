@@ -17,6 +17,8 @@ class PreviewPhotoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPreviewPhotoBinding
     private val viewModel by lazy { PreviewPhotoViewModel() }
 
+    private val imageUrl by lazy { intent?.getStringExtra(URL) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPreviewPhotoBinding.inflate(layoutInflater)
@@ -35,8 +37,7 @@ class PreviewPhotoActivity : AppCompatActivity() {
                     binding.loadingLayout.loading.visibility = View.GONE
                 }
                 is PreviewPhotoState.Loading -> {
-                    val url = intent?.getStringExtra(URL)
-                    binding.photoBackground.loadThumbnail(url)
+                    binding.loadingLayout.loading.visibility = View.VISIBLE
                 }
                 else -> {
                     binding.loadingLayout.loading.visibility = View.GONE
@@ -58,8 +59,7 @@ class PreviewPhotoActivity : AppCompatActivity() {
     }
 
     private fun fetchPhotoList() {
-        val url = intent?.getStringExtra(URL)
-        viewModel.fetchSpecificPhoto(getUrlId(url), PhotoSchemeConstants.PHOTO_PATH)
+        viewModel.fetchSpecificPhoto(getUrlId(imageUrl), PhotoSchemeConstants.PHOTO_PATH)
         binding.loadingLayout.loading.visibility = View.VISIBLE
         binding.errorLayout.error.visibility = View.GONE
     }
