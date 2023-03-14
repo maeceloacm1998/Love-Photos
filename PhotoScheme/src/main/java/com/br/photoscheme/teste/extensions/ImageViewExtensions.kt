@@ -44,7 +44,6 @@ fun ImageView.loadThumbnail(url: String?) {
         Glide.with(context)
             .load(url)
             .thumbnail(0.1f)
-            .centerCrop()
             .placeholder(R.drawable.ic_unavailable_image)
             .into(this)
     }

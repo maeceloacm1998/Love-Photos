@@ -22,6 +22,7 @@ import com.br.photoscheme.teste.constants.PhotoSchemeConstants
 import com.br.photoscheme.teste.extensions.LoadBitmapResponse
 import com.br.photoscheme.teste.extensions.load
 import com.br.photoscheme.teste.extensions.loadBitmap
+import com.br.photoscheme.teste.extensions.loadThumbnail
 import com.br.photoscheme.teste.state.PreviewPhotoState
 import com.br.photoscheme.teste.viewModel.PreviewPhotoViewModel
 import java.io.FileOutputStream
@@ -74,6 +75,7 @@ class PreviewPhotoActivity : AppCompatActivity() {
     }
 
     private fun fetchPhotoList() {
+        binding.background.loadThumbnail(imageUrl)
         viewModel.fetchSpecificPhoto(getUrlId(imageUrl), PhotoSchemeConstants.PHOTO_PATH)
         binding.loadingLayout.loading.visibility = View.VISIBLE
         binding.errorLayout.error.visibility = View.GONE
