@@ -4,4 +4,10 @@
     <string name="message_error">Erro ao carregar sua imagem, tente novamente :(</string>
     <string name="retry_btn_text">Tentar Novamente</string>
     <string name="save_photo_text">Salvando a foto...</string>
+    <string name="progress_download">Download em andamento</string>
+    <string name="success_download">Download Concluído</string>
+    <string name="error_image">Temos um problema para baixar essa imagem. Tente novamente mais tarde.</string>
+    <string name="loading_image">Baixando a imagem, aguarde um momento.</string>
+    <string name="loading_gallery">Salvando a imagem na galeria, aguarde um momento.</string>
+    <string name="success_gallery">Imagem salva com sucesso.</string>
 </resources>

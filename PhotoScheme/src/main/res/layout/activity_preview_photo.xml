@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".teste.view.PreviewPhotoActivity">
 
     <ImageView
@@ -36,9 +36,22 @@
         android:id="@+id/back_btn"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:background="?attr/selectableItemBackground"
         android:src="@drawable/ic_arrow_left_24"
         app:layout_constraintBottom_toBottomOf="@id/header_container"
         app:layout_constraintStart_toStartOf="@id/header_container"
+        app:layout_constraintTop_toTopOf="@id/header_container"
+        app:tint="@color/white" />
+
+    <ImageView
+        android:id="@+id/download"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:src="@drawable/ic_download"
+        app:layout_constraintBottom_toBottomOf="@id/header_container"
+        app:layout_constraintEnd_toEndOf="@id/header_container"
         app:layout_constraintTop_toTopOf="@id/header_container"
         app:tint="@color/white" />
 

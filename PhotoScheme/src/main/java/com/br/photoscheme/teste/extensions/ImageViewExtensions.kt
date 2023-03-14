@@ -3,6 +3,7 @@ package com.br.photoscheme.teste.extensions
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Matrix
+import android.graphics.drawable.Drawable
 import android.media.ExifInterface
 import android.net.Uri
 import android.provider.MediaStore
@@ -11,9 +12,17 @@ import com.br.photoscheme.R
 import com.br.photoscheme.teste.utils.LovePhotoPicasso
 import com.bumptech.glide.Glide
 import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import com.squareup.picasso.RequestCreator
+import com.squareup.picasso.Target
 import java.io.ByteArrayOutputStream
 import java.io.IOException
+
+interface LoadBitmapResponse {
+    fun success(bitmap: Bitmap)
+    fun error()
+    fun loading()
+}
 
 fun ImageView.load(
     url: String?,
@@ -39,6 +48,26 @@ fun ImageView.loadThumbnail(url: String?) {
             .placeholder(R.drawable.ic_unavailable_image)
             .into(this)
     }
+}
+
+fun loadBitmap(url: String, loadBitmapResponse: LoadBitmapResponse) {
+    Picasso.get()
+        .load(url)
+        .into(object : Target {
+            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+                if (bitmap != null) {
+                    loadBitmapResponse.success(bitmap)
+                }
+            }
+
+            override fun onBitmapFailed(e: java.lang.Exception?, errorDrawable: Drawable?) {
+                loadBitmapResponse.error()
+            }
+
+            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+                loadBitmapResponse.loading()
+            }
+        })
 }
 
 // Essa função veio através da resposta dessa link no stackoverflow.

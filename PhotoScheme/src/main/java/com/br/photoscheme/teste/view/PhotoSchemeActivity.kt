@@ -1,11 +1,14 @@
 package com.br.photoscheme.teste.view
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.br.photoscheme.databinding.ActivityPhotoSchemeBinding
 import com.br.photoscheme.teste.constants.PhotoSchemeConstants
@@ -36,6 +39,12 @@ class PhotoSchemeActivity : AppCompatActivity() {
         binding = ActivityPhotoSchemeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         PhotoListDB.getDataBase(applicationContext);
+
+        ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        ActivityCompat.requestPermissions(
+            this,
+            listOf(Manifest.permission.WRITE_EXTERNAL_STORAGE).toTypedArray(), 122
+        )
 
         photoSchemeController()
         observers()
