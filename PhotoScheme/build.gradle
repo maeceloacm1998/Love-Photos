@@ -84,4 +84,6 @@ dependencies {
 
     // SwipeRefresh
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshVersion"
+
+    implementation 'com.jsibbold:zoomage:1.3.1'
 }

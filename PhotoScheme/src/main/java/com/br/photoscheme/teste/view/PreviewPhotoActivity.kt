@@ -1,5 +1,6 @@
 package com.br.photoscheme.teste.view
 
+import android.annotation.SuppressLint
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.ContentValues
@@ -25,7 +26,9 @@ import com.br.photoscheme.teste.extensions.loadBitmap
 import com.br.photoscheme.teste.extensions.loadThumbnail
 import com.br.photoscheme.teste.state.PreviewPhotoState
 import com.br.photoscheme.teste.viewModel.PreviewPhotoViewModel
+import com.squareup.picasso.Callback
 import java.io.FileOutputStream
+import java.lang.Exception
 import java.util.UUID
 
 class PreviewPhotoActivity : AppCompatActivity() {
@@ -89,7 +92,13 @@ class PreviewPhotoActivity : AppCompatActivity() {
 
     private fun showPhoto(url: String?) {
         url.let {
-            binding.previewPhoto.load(url)
+            binding.previewPhoto.load(url = it, callback = object : Callback {
+                override fun onSuccess() {
+                    binding.background.visibility = View.GONE
+                }
+
+                override fun onError(e: Exception?) {}
+            })
         }
     }
 
