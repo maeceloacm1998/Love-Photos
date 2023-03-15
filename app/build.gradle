@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    def lottieVersion = "5.0.3"
+
     api project(path: ':PhotoScheme')
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -50,4 +52,7 @@ dependencies {
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-storage-ktx'
+
+    // Lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }

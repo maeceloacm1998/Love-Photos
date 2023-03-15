@@ -1,6 +1,7 @@
 package com.br.photoscheme.teste.view
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -29,8 +30,7 @@ class PhotoSchemeActivity : AppCompatActivity() {
     private val controller by lazy { PhotoSchemeController(photoSchemeContract) }
     private val viewModel by lazy {
         PhotoSchemeViewModel(
-            PhotoSchemeRepository(),
-            ThumbListDB.getDataBase(applicationContext).thumbListDAO()
+            PhotoSchemeRepository(), ThumbListDB.getDataBase(applicationContext).thumbListDAO()
         )
     }
 
@@ -42,8 +42,7 @@ class PhotoSchemeActivity : AppCompatActivity() {
 
         ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         ActivityCompat.requestPermissions(
-            this,
-            listOf(Manifest.permission.WRITE_EXTERNAL_STORAGE).toTypedArray(), 122
+            this, listOf(Manifest.permission.WRITE_EXTERNAL_STORAGE).toTypedArray(), 122
         )
 
         photoSchemeController()
@@ -56,7 +55,9 @@ class PhotoSchemeActivity : AppCompatActivity() {
         binding.photoSchemeRv.apply {
             setController(controller)
             layoutManager = GridLayoutManager(context, 4)
-            val itemDecoration = GridLayoutDecoration(applicationContext, com.airbnb.viewmodeladapter.R.dimen.abc_control_padding_material)
+            val itemDecoration = GridLayoutDecoration(
+                applicationContext, com.airbnb.viewmodeladapter.R.dimen.abc_control_padding_material
+            )
             addItemDecoration(itemDecoration)
             requestModelBuild()
         }
@@ -150,5 +151,11 @@ class PhotoSchemeActivity : AppCompatActivity() {
         binding.photoSchemeShimmerId.shimmer.visibility = View.GONE
         binding.layoutUpdatePhoto.loading.visibility = View.VISIBLE
         binding.layoutUpdatePhoto.animationView.speed = 0.3F
+    }
+
+    companion object {
+        fun newInstance(context: Context): Intent {
+            return Intent(context, PhotoSchemeActivity::class.java)
+        }
     }
 }

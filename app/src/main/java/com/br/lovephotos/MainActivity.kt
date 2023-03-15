@@ -1,9 +1,10 @@
 package com.br.lovephotos
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.br.photoscheme.teste.view.PhotoSchemeActivity
+import android.os.Handler
+import androidx.appcompat.app.AppCompatActivity
+import com.br.lovephotos.view.AuthActivity
 import com.google.firebase.FirebaseApp
 
 class MainActivity : AppCompatActivity() {
@@ -12,11 +13,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         FirebaseApp.initializeApp(applicationContext)
 
-        goToGallery()
+        Handler().postDelayed(Runnable {
+            goToAuth()
+        }, 2000)
     }
 
-    private fun goToGallery() {
-        val intent = Intent(applicationContext, PhotoSchemeActivity::class.java)
+    private fun goToAuth() {
+        val intent = Intent(AuthActivity.newInstance(this))
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }

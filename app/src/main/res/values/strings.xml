@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">LovePhotos</string>
+
+    // AUTH
+    <string name="auth_title">Acesso Bloqueado</string>
+    <string name="auth_hint_edit_text">Digite o PIN</string>
+    <string name="auth_enter_error">* PIN incorreto. Se tu não for a maravilhosa, sai vazado.</string>
+    <string name="auth_button_text">Entrar</string>
 </resources>
