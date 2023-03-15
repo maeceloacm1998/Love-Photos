@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import com.br.lovephotos.databinding.ActivityAuthBinding
 import com.br.photoscheme.teste.view.PhotoSchemeActivity
 
@@ -25,6 +26,15 @@ class AuthActivity : AppCompatActivity() {
         binding.submit.setOnClickListener {
             handleSubmit()
         }
+
+        binding.pin.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                handleSubmit()
+            }
+            false
+        }
+
+        binding.animationView.speed = 1.4f
     }
 
     private fun handleSubmit() {
